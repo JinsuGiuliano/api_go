@@ -93,7 +93,17 @@ func (cont *Controller) Login(c *gin.Context) {
 	}
 	http.SetCookie(c.Writer, cookie)
 
-	c.JSON(http.StatusOK, model.Msg{Text: "LoggedIn"})
+	Itoken := model.AccessToken{
+		Id:     expectedUser.ID.Hex(),
+		Token:  sessionToken,
+		Expire: time.Now().Add(1200 * time.Second),
+		Email:  creds.Email,
+	}
+
+	cont.data.DeleteAccessToken(creds.Email)
+	cont.data.CreateAccessToken(&Itoken)
+	cont.data.SetAccessTokenToUser(&Itoken)
+	c.JSON(http.StatusOK, model.Msg{Text: "LoggedIn", Token: sessionToken})
 }
 
 func (cont *Controller) SignupUser(c *gin.Context) { //nolint:funlen
