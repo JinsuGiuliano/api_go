@@ -10,3 +10,12 @@ type Credentials struct {
 type Session struct {
 	Email string `json:"email"`
 }
+
+type SignupUserModel struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	UserName string `json:"username"`
+	// Phone           string `json:"phone"`
+	// Code2FA         string `json:"code2FA"`
+	// OnboardingToken string `json:"onboardingToken"`
+}

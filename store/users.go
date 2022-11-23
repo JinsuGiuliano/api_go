@@ -96,12 +96,12 @@ func (s *Store) GetUserByGoogleID(id string) (model.User, error) {
 	return user, nil
 }
 
-func (s *Store) UserByEmail(email string) (u model.User, e error) {
+func (s *Store) UserBy(key string, val string) (u model.User, e error) {
 	var User model.User
-	fmt.Println("UserByEmail")
+
 	userCollection := s.db.Collection("users")
 
-	filter := bson.D{{Key: "email", Value: email}}
+	filter := bson.D{{Key: key, Value: val}}
 	err := userCollection.FindOne(s.ctx, filter).Decode(&User)
 	if err != nil {
 		return model.User{}, fmt.Errorf("there is no user associated with the given email")

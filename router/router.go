@@ -16,6 +16,8 @@ func Set(server *server.Server, cont *controller.Controller) {
 		auth.GET("/", cont.HandleMain)
 		auth.GET("/login-gl", cont.HandleGoogleLogin)
 		auth.GET("/callback-gl", cont.CallBackFromGoogle)
+		auth.GET("/login", cont.Login)
+		auth.POST("/signup", cont.SignupUser)
 	}
 
 	authorized := v1.Group("/")

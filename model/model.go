@@ -10,7 +10,7 @@ type IUser interface {
 	GetUsers() []User
 	InsertUser(User) User
 	DeleteUser(string) string
-	UserByEmail(string) (User, error)
+	UserBy(string, string) (User, error)
 	GetUserByToken(string) (User, error)
 	GetUserByID(string) (User, error)
 }
@@ -18,6 +18,7 @@ type IUser interface {
 type User struct {
 	ID             primitive.ObjectID `bson:"_id,omitempty"`
 	Username       string             `bson:"username,omitempty"`
+	Password       string             `bson:"password,omitempty"`
 	CreatedAt      time.Time          `bson:"createdAt,omitempty"`
 	Email          string             `bson:"email,omitempty"`
 	Token          string             `bson:"token,omitempty"`

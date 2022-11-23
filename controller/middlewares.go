@@ -96,7 +96,7 @@ func (cont *Controller) AccessTokenAuth(c *gin.Context, tokenInfo []string) {
 }
 
 func (cont *Controller) UserTokenAuth(c *gin.Context, tokenInfo []string) {
-	user, err := cont.data.UserByEmail(tokenInfo[0])
+	user, err := cont.data.UserBy("email", tokenInfo[0])
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, model.HTTPError{Error: "Token Auth Unauthorized 1"})
 		return

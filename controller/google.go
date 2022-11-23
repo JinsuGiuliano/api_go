@@ -101,7 +101,7 @@ func (cont *Controller) CallBackFromGoogle(c *gin.Context) {
 			Email:  googleUser.Email,
 		}
 
-		u, err := cont.data.UserByEmail(googleUser.Email)
+		u, err := cont.data.UserBy("email", googleUser.Email)
 		if err != nil || u.Token == "" {
 			fmt.Println("User not found by GoogleID:")
 			user := model.User{
